@@ -8,7 +8,7 @@ void le_alunos(int* matriculas, char nomes[][50], int* n){
     char nome[50];
     int i;
     int linha;
-    FILE*f = fopen("alunos.txt", "R");
+    FILE*f = fopen("alunos.txt", "r");
     linha = 0;
     while(feof(f) == 0){
         if(fscanf(f, "%d", &mat) <= 0)
@@ -32,7 +32,7 @@ void le_alunos(int* matriculas, char nomes[][50], int* n){
 void le_notas (float* medias){
     int i=0,mat;
     float n1,n2;
-    FILE*f = fopen("notas.txt", "R");
+    FILE*f = fopen("notas.txt", "r");
     while(feof(f) == 0){
         if(fscanf(f, "%d" "%f" "%f\n", &mat, &n1, &n2) == 0);
         break;
