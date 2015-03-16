@@ -1,0 +1,63 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+    void le.alunos (int* matriculas, char** nomes, int* n);
+     {
+          FILE*f = fopen("alunos.txt", "R");
+    linha = 0;
+    while
+    {
+        if(fscanf(f, "%d", &mat) <= 0)
+        break;
+        i = 0;
+        c = fgetc(f);
+        while(c != '\n'){
+            nome[i] = c;
+            c = fgetc(f);
+            i++;
+        }
+        nome[i] = '\0';
+        matriculas[linha]=mat;
+        strcpy(nomes[linha], nome);
+        linha++;
+    }
+    n = linha;
+    fclose(f);
+    }
+
+
+
+void leNotas(float* medias)
+{
+
+int i = 0, mat, nota1, nota2;
+
+ FILE *f = fopen ("notas.txt","r");
+ int i=0;
+while (feof(f) == 0)
+    {
+       i = 0;
+       if(fscanf(f, "%d %f %f", &mat, &nota1, &nota2) == 0)
+       break;
+       
+    }
+
+}
+int main (int argc, char **argv)
+{
+    char *nome ;
+
+    if (argc>1)
+    {
+        nome=argv[1] ;
+    }
+    printf ("%s\n", nome);
+
+    int matricula[50];
+    char nomes[50][50];
+    int n;
+    float med[50]
+    le.alunos (matriculas,nomes, &n);
+    le.notes(medias)
+}
+
