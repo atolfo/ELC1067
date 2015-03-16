@@ -49,7 +49,7 @@ void procura_aluno (char* nome, char nomes[][50], int n, float* medias){
             printf("%f %s", medias[i], nomes[i]);
         }
     }
-    return 0;
+    return;
 }
 
 int main(int argc, char** argv){
