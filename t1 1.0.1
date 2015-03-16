@@ -1,13 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-    void le.alunos (int* matriculas, char** nomes, int* n);
-     {
-          FILE*f = fopen("alunos.txt", "R");
+#include <string.h>
+ 
+void le_alunos(int* matriculas, char nomes[][50], int* n){
+    int mat;
+    char c;
+    char nome[50];
+    int i;
+    int linha;
+    FILE*f = fopen("alunos.txt", "R");
     linha = 0;
-    while
-    {
-        if(fscanf(f, "%d", &mat) <= 0)
+    while(feof(f) == 0){
+        if(fscanf(f, "%d", &mat) == 0)
         break;
         i = 0;
         c = fgetc(f);
@@ -18,13 +22,13 @@
         }
         nome[i] = '\0';
         matriculas[linha]=mat;
-        strcpy(nomes[linha], nome);
+        strcpy(nomes[linha],nome);
         linha++;
     }
-    n = linha;
+    *n = linha;
     fclose(f);
-    }
-
+}
+ 
 void le_notas (float* medias){
     int i=0,mat;
     float n1,n2;
@@ -47,23 +51,19 @@ void procura_aluno (char* nome, char nomes[][50], int n, float* medias){
     }
     return 0;
 }
-
-}
-int main (int argc, char **argv)
-{
-    char *nome ;
-
-    if (argc>1)
-    {
-        nome=argv[1] ;
+ 
+int main(int argc, char** argv){
+    char* nome;
+    if(argc > 1){
+        strcpy(nome, argv[1]);
     }
-    printf ("%s\n", nome);
-
-    int matricula[50];
+    printf("%s\n", nome);
+    int matriculas[50];
     char nomes[50][50];
     int n;
-    float med[50]
-    le.alunos (matriculas,nomes, &n);
-    le.notes(medias)
+    le_alunos(matriculas, nomes, &n);
+    float medias[50];
+    le_notas(medias);
+    procura_aluno(nome,nomes,n,medias);
+ 
 }
-
