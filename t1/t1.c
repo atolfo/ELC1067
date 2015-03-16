@@ -11,7 +11,7 @@ void le_alunos(int* matriculas, char nomes[][50], int* n){
     FILE*f = fopen("alunos.txt", "r");
     linha = 0;
     while(feof(f) == 0){
-        if(fscanf(f, "%d", &mat) <= 0)
+        if(fscanf(f, "%d", &mat) < 0)
         break;
         i = 0;
         c = fgetc(f);
@@ -34,7 +34,7 @@ void le_notas (float* medias){
     float n1,n2;
     FILE*f = fopen("notas.txt", "r");
     while(feof(f) == 0){
-        if(fscanf(f, "%d %f %f\n", &mat, &n1, &n2) <= 0)
+        if(fscanf(f, "%d %f %f\n", &mat, &n1, &n2) < 0)
         break;
         medias[i]=(n1+n2)/2;
         i++;
