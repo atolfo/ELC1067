@@ -34,7 +34,7 @@ void le_notas (float* medias){
     float n1,n2;
     FILE*f = fopen("notas.txt", "r");
     while(feof(f) == 0){
-        if(fscanf(f, "%d" "%f" "%f\n", &mat, &n1, &n2) == 0);
+        if(fscanf(f, "%d %f %f\n", &mat, &n1, &n2) <= 0)
         break;
         medias[i]=(n1+n2)/2;
         i++;
