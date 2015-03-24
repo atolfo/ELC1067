@@ -2,10 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-void le_alunos(int* matriculas, char nomes* [50], int* n){
+void le_alunos(int* matriculas, char** nomes, int* n){
     int mat;
     char c;
-    char nome[50];
+    char *nome;
     int i;
     int linha;
     nome=(char*)malloc(50*sizeof(char));
@@ -27,13 +27,7 @@ void le_alunos(int* matriculas, char nomes* [50], int* n){
         nomes=(char*)malloc((strlen(nome)+1)*sizeof(char));
         strcpy(nomes[linha],nome);
         linha++;
-         if(linha >= 50)
-            {
-                matAlunos = (int*) realloc(matriculas, TAM*sizeof(int));
-                nomes = (int**) realloc(nomes, TAM*sizeof(int*));
-            }
     }
-    *n = linha;
     fclose(f);
 }
 
@@ -53,28 +47,52 @@ void le_notas (float *medias){
     fclose(f);
 }
 
-void procura_aluno (char nome[50], char nomes[][50], int n, float* medias){
+void procura_aluno (char* nome, char* nomes, int* n, float* medias){
     int i=0;
     for(i = 0; i<n; i++){
-        if(strstr(nomes[i], nome)!=NULL){
-            printf("%f %s", medias[i], nomes[i]);
+        if(strstr(nomes[cont], nome)!=NULL){
+            printf("%f %s\n", medias[cont], nomes[cont]);
         }
     }
     return;
 }
 
 int main(int argc, char** argv){
-    char nome[50];
-    if(argc > 1){
-        strcpy(nome, argv[1]);
+    char *nome;
+    nome=(char*)malloc(50*sizeof(char));
+    if(nome==NULL){
+        printf("\nErro na alocacao de memoria.\n");
+        exit(1);
     }
-    printf("%s\n", nome);
-    int matriculas[50];
-    char nomes[50][50];
-    int n;
-    le_alunos(matriculas, nomes, &n);
-    float medias[50];
+    float *medias;
+    medias=(float*)malloc(50*sizeof(float));
+    if(medias==NULL){
+        printf("\nErro na alocacao de memoria.\n");
+        exit(1);
+    }
+    int *matri,*n;
+    n=matri=(int*)malloc(50*sizeof(int));
+    if(n==NULL || matri==NULL ){
+        printf("\nErro na alocacao de memoria.\n");
+        exit(1);
+    }
+    char** nomes;
+    nomes=(char**)malloc(50*sizeof(char*));
+    if(nomes==NULL){
+        printf("\nErro na alocacao de memoria.\n");
+        exit(1);
+    }
+    if(argv > 1){
+        *nome = argv[1];
+    }
+    printf("%s \n", nome);
+    procura_aluno(matri,nomes,n);
     le_notas(medias);
-    procura_aluno(nome,nomes,n,medias);
+    le_alunos(nome,nomes,n,medias);
+    free(nome);
+    free(medias);
+    free(matri);
+    free(n);
+    free(nomes);
 
 }
