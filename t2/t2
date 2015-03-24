@@ -2,28 +2,29 @@
 #include <stdlib.h>
 #include <string.h>
 
-void le_alunos(int* matriculas, char nomes[][50], int* n){
+void le_alunos(int* matriculas, char nomes* [50], int* n){
     int mat;
     char c;
     char nome[50];
     int i;
     int linha;
+    nome=(char*)malloc(50*sizeof(char));
     FILE*f = fopen("alunos.txt", "r");
     linha = 0;
-
     while(feof(f) == 0){
         if(fscanf(f, "%d", &mat) < 0)
         break;
         i = 0;
         c = fgetc(f);
-        while(c != '\n'){
+        while(c != '\n' && feof(f)==0)
+        {
             nome[i] = c;
             c = fgetc(f);
             i++;
         }
         nome[i] = '\0';
         matriculas[linha]=mat;
-        nomes[linha] = (int*) malloc(TAM*sizeof(int));
+        nomes=(char*)malloc((strlen(nome)+1)*sizeof(char));
         strcpy(nomes[linha],nome);
         linha++;
          if(linha >= 50)
@@ -36,13 +37,16 @@ void le_alunos(int* matriculas, char nomes[][50], int* n){
     fclose(f);
 }
 
-void le_notas (float* medias){
+void le_notas (float *medias){
     int i=0,mat;
     float n1,n2;
     FILE*f = fopen("notas.txt", "r");
     while(feof(f) == 0){
-        if(fscanf(f, "%d %f %f\n", &mat, &n1, &n2) < 0)
-        break;
+        if(fscanf(f, "%d %f %f\n", &mat, &n1, &n2) <= 0)
+        {
+            break;
+        }
+
         medias[i]=(n1+n2)/2;
         i++;
     }
