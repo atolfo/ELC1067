@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-void le_alunos(int* matriculas, char** nomes, int* n){
+void le_alunos(int* matriculas, char** nomes, int* n)
+{
     int mat;
     char c;
     char *nome;
@@ -32,7 +33,8 @@ void le_alunos(int* matriculas, char** nomes, int* n){
     fclose(f);
 }
 
-void le_notas (float *medias){
+void le_notas (float *medias)
+{
     int i=0,mat;
     float n1,n2;
     FILE*f = fopen("notas.txt", "r");
@@ -48,7 +50,8 @@ void le_notas (float *medias){
     fclose(f);
 }
 
-void procura_aluno (char* nome, char* nomes, int* n, float* medias){
+void procura_aluno (char* nome, char* nomes, int* n, float* medias)
+{
     int i=0;
     for(i = 0; i<n; i++)
     {
@@ -62,12 +65,14 @@ void procura_aluno (char* nome, char* nomes, int* n, float* medias){
 
 int main(int argc, char** argv)
 {
-    int i,*n,*matriculas
+    int i,*n,*matriculas;
+    float *medias;
+    char **nomes;
     char *nome;
     medias=(float*)malloc(50*sizeof(float));
     n=matriculas =(int*)malloc(50*sizeof(int));
     nomes=(char**)malloc(50*sizeof(char*));
-    if(nome==NULL || medias==NULL ||matriculas==NULL || n==NULL)
+    if(nomes==NULL || medias==NULL ||matriculas==NULL || n==NULL)
     {
         printf("\nProblemas com alocação de memoria, o programa será finalizado.\n");
         exit(1);
@@ -77,7 +82,7 @@ int main(int argc, char** argv)
         nome = argv[1];
     }
     printf("%s \n", nome);
-    procura_aluno(matriculas,nomes,n);
+    le_aluno(matriculas,nomes,n);
     le_notas(medias);
     le_alunos(nome,nomes,n,medias);
     free(nome);
