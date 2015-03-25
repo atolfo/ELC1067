@@ -8,6 +8,7 @@ void le_alunos(int* matriculas, char** nomes, int* n){
     char *nome;
     int i;
     int linha;
+
     nome=(char*)malloc(50*sizeof(char));
     FILE*f = fopen("alunos.txt", "r");
     linha = 0;
@@ -49,50 +50,45 @@ void le_notas (float *medias){
 
 void procura_aluno (char* nome, char* nomes, int* n, float* medias){
     int i=0;
-    for(i = 0; i<n; i++){
-        if(strstr(nomes[cont], nome)!=NULL){
-            printf("%f %s\n", medias[cont], nomes[cont]);
+    for(i = 0; i<n; i++)
+    {
+        if(strstr(nomes[i], nome)!=NULL)
+        {
+            printf("%f %s\n", medias[i], nomes[i]);
         }
     }
     return;
 }
 
-int main(int argc, char** argv){
+int main(int argc, char** argv)
+{
+    int i,*n,*matriculas
     char *nome;
-    nome=(char*)malloc(50*sizeof(char));
-    if(nome==NULL){
-        printf("\nErro na alocacao de memoria.\n");
-        exit(1);
-    }
-    float *medias;
     medias=(float*)malloc(50*sizeof(float));
-    if(medias==NULL){
-        printf("\nErro na alocacao de memoria.\n");
-        exit(1);
-    }
-    int *matri,*n;
-    n=matri=(int*)malloc(50*sizeof(int));
-    if(n==NULL || matri==NULL ){
-        printf("\nErro na alocacao de memoria.\n");
-        exit(1);
-    }
-    char** nomes;
+    n=matriculas =(int*)malloc(50*sizeof(int));
     nomes=(char**)malloc(50*sizeof(char*));
-    if(nomes==NULL){
-        printf("\nErro na alocacao de memoria.\n");
+    if(nome==NULL || medias==NULL ||matriculas==NULL || n==NULL)
+    {
+        printf("\nProblemas com alocação de memoria, o programa será finalizado.\n");
         exit(1);
     }
-    if(argv > 1){
-        *nome = argv[1];
+    if(argc > 1)
+    {
+        nome = argv[1];
     }
     printf("%s \n", nome);
-    procura_aluno(matri,nomes,n);
+    procura_aluno(matriculas,nomes,n);
     le_notas(medias);
     le_alunos(nome,nomes,n,medias);
     free(nome);
     free(medias);
-    free(matri);
+    free(matriculas);
     free(n);
+    free(nomes);
+    for(i=0;i<*n;i++)
+    {
+        free(nomes[i]);
+    }
     free(nomes);
 
 }
