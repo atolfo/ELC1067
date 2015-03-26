@@ -2,16 +2,13 @@
 #include <stdlib.h>
 #include <string.h>
 
-void le_alunos(int* matricula, char** nomes, int* n)
-{
-    int mat;
+void ler_alunos(int* matricula,char** nomes,int* n ){
     char c;
     char *nome;
-    int i;
-    int linha;
+    int mat,i,linha;
 
     nome=(char*)malloc(50*sizeof(char));
-    if(nome == NULL)
+    if(nome==NULL)
     {
         printf("\nProblemas com alocacao de memoria, o prorama sera finalizado.\n");
         exit(1);
@@ -26,6 +23,7 @@ void le_alunos(int* matricula, char** nomes, int* n)
 
         i = 0;
         c = fgetc(f);
+
         while(c != '\n' && feof(f)==0)
         {
             nome[i] = c;
@@ -40,9 +38,9 @@ void le_alunos(int* matricula, char** nomes, int* n)
     }
 }
 
-void le_notas (float *medias)
+void ler_notas(float *medias)
 {
-    int i=0,mat;
+    int mat, i=0;
     float z1,z2;
     FILE*f = fopen("notas.txt", "r");
     while(feof(f) == 0)
@@ -57,50 +55,52 @@ void le_notas (float *medias)
     fclose(f);
 }
 
-void procura_aluno (char* nome, char** nomes, float* medias, int* n)
+void procura_aluno(char* nome, char** nomes, int* n, float* medias)
 {
     int i;
-    for(i = 0; i<*n; i++)
+    for(i=0;i<*n;i++)
     {
-        if(strstr(nomes[i], nome)!= NULL)
+        if(strstr(nomes[i], nome)!=NULL)
         {
             printf("%f %s\n", medias[i], nomes[i]);
         }
     }
 }
 
-int main(int argc, char** argv)
+int main (int argc,char** argv)
 {
-    int cont,*n;
-    int *matricula;
+    int *matricula,*n,cont;
+    char *nome;
     float *medias;
     char** nomes;
-    char *nome;
+
+    nome=(char*)malloc(50*sizeof(char));
     medias=(float*)malloc(50*sizeof(float));
-    n=matricula =(int*)malloc(50*sizeof(int));
+    n=matricula=(int*)malloc(50*sizeof(int));
     nomes=(char**)malloc(50*sizeof(char*));
-    if(nomes == NULL || medias == NULL ||matricula == NULL || n == NULL)
+
+    if(nome==NULL || medias==NULL || n==NULL || matricula==NULL)
     {
-        printf("\nProblemas com alocacao de memoria, o programa sera finalizado.\n");
+        printf("\nProblemas com alocacao de memoria, o prorama sera finalizado.\n");
         exit(1);
     }
+
     if(argc > 1)
     {
         nome = argv[1];
     }
+
     printf("%s \n", nome);
-    le_aluno(matricula,nomes,n);
-    le_notas(medias);
-    le_alunos(nome,nomes,n,medias);
+    ler_alunos(matricula,nomes,n);
+    ler_notas(medias);
+    procura_aluno(nome,nomes,n,medias);
+    free(n);
     free(nome);
     free(medias);
     free(matricula);
-    free(n);
-    free(nomes);
     for(cont=0;cont<*n;cont++)
     {
         free(nomes[cont]);
     }
     free(nomes);
-
 }
