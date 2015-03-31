@@ -34,6 +34,7 @@
 #include "carta.h"
 #include "memo.h"
 
+#define qt 11
 struct vetor
 {
 	int x;
@@ -48,8 +49,8 @@ vetor_t* vetor_cria(void)
 	vet->x = 0;
 	vet->n = 0;
 	int cont;
-    vet->baralho = (carta*)memo_aloca(50*sizeof(carta));
-    for(cont=0;cont<50;cont++){
+    vet->baralho = (carta*)memo_aloca(qt*sizeof(carta));
+    for(cont=0;cont<qt;cont++){
         vet->baralho[i]=NULL;
     }
 	return vet;
@@ -72,8 +73,8 @@ void vetor_insere_carta(vetor_t *vet, int indice, carta c)
 
 	if((vet->n+1)%50==0 && vet->x!=-1)
     {
-        vet->baralho = (vetor_t*) memo_realoca(vet->baralho,(vet->n)+1+5);
-        for(j=vet->n;j<vet->n+50;j++)
+        vet->baralho = (vetor_t*) memo_realoca(vet->baralho,((vet->n)+1+qt)*sizeof(carta));
+        for(j=vet->n;j<vet->n+qt;j++)
         {
             vet->baralho[j]=NULL;
         }
