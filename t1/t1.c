@@ -10,6 +10,7 @@ void le_alunos(int* matriculas, char nomes[][50], int* n){
     int linha;
     FILE*f = fopen("alunos.txt", "r");
     linha = 0;
+
     while(feof(f) == 0){
         if(fscanf(f, "%d", &mat) < 0)
         break;
@@ -22,8 +23,14 @@ void le_alunos(int* matriculas, char nomes[][50], int* n){
         }
         nome[i] = '\0';
         matriculas[linha]=mat;
+        nomes[linha] = (int*) malloc(TAM*sizeof(int));
         strcpy(nomes[linha],nome);
         linha++;
+         if(linha >= 50)
+            {
+                matAlunos = (int*) realloc(matriculas, TAM*sizeof(int));
+                nomes = (int**) realloc(nomes, TAM*sizeof(int*));
+            }
     }
     *n = linha;
     fclose(f);
@@ -42,7 +49,7 @@ void le_notas (float* medias){
     fclose(f);
 }
 
-void procura_aluno (char* nome, char nomes[][50], int n, float* medias){
+void procura_aluno (char nome[50], char nomes[][50], int n, float* medias){
     int i=0;
     for(i = 0; i<n; i++){
         if(strstr(nomes[i], nome)!=NULL){
@@ -53,7 +60,7 @@ void procura_aluno (char* nome, char nomes[][50], int n, float* medias){
 }
 
 int main(int argc, char** argv){
-    char* nome;
+    char nome[50];
     if(argc > 1){
         strcpy(nome, argv[1]);
     }
