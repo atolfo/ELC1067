@@ -38,7 +38,7 @@ void arv_imprime_pre_ordem(arv_t* arbor)
 
 //impressao em-ordem (esquerda, raiz, direita)
 void arv_imprime_em_ordem(arv_t* arbor)
-
+{
     if(arbor == NULL)
         return;
     arv_imprime_em_ordem(arbor->esq);
